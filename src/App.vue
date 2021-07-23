@@ -2,6 +2,7 @@
   <div id="app">
     <header>
       <span>Vue.js PWA</span>
+      <span>pomodoro technique</span>
     </header>
     <main>
       <img src="./assets/logo.png" alt="Vue.js PWA">
