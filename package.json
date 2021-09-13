@@ -14,7 +14,9 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "pug": "^3.0.2",
     "vue": "^2.5.2",
+    "vue-cli-plugin-pug": "^2.0.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

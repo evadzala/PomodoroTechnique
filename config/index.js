@@ -4,6 +4,13 @@
 const path = require('path')
 
 module.exports = {
+  chainWebpack: config => {
+    config.module.rule('pug')
+      .test(/\.pug$/)
+      .use('pug-html-loader')
+      .loader('pug-html-loader')
+      .end()
+  },
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
