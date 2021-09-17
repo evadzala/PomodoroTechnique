@@ -1,22 +1,21 @@
-<template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="http://chat.vuejs.org/" target="_blank" rel="noopener">Vue Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+<template lang="pug">
+  .toDoList
+    h1 to do list
+    .inputComponent
+      input.inputBorder(type="text" v-model="content" placeholder="請輸入" @keyup.enter="addItem")
+    .contentList
+      .cell(v-for="(item, index) in notCompleteList" :key="index")
+        input(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
+        label {{ item.content }}
+    
+    //- h1 complete list
+    //- div.contentList
+    //-   div.cell(v-for="(item, index) in isCompleteList" :key='index')
+    //-     input(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
+    //-     label {{ item.content}}
+    
+    
+
 </template>
 
 <script>
@@ -24,7 +23,44 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js PWA test'
+      content: '',
+      toDoList: [
+        { index: 1, content: 'test1', isComplete: false },
+        { index: 2, content: 'test2', isComplete: true },
+        { index: 3, content: 'test3', isComplete: false },
+        { index: 4, content: 'test4', isComplete: true },
+        { index: 5, content: 'test5', isComplete: false }
+      ]
+    }
+  },
+
+  computed: {
+    isCompleteList () {
+      return this.toDoList.filter(node => node.isComplete)
+    },
+    notCompleteList () {
+      return this.toDoList.filter(node => !node.isComplete)
+    }
+  },
+
+  methods: {
+    addItem () {
+      if (this.content !== '') {
+        this.toDoList.push(
+          {
+            index: this.toDoList.length + 1,
+            content: this.content,
+            isComplete: false
+          }
+        )
+      }
+      this.content = ''
+    },
+    doCheck (data, index) {
+      console.log('index', index)
+      console.log('data', data)
+      // data.isComplete = !data.isComplete
+      // this.toDoList.fill(data, )
     }
   }
 }
@@ -36,14 +72,20 @@ h1, h2 {
   font-weight: normal;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.contentList {
+  background-color: #442556;
+  margin: 0px 10%;
+  max-width: 375px;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.inputBorder {
+  border-color: #f5a623;
+  width: auto;
+}
+
+.cell {
+  text-align: initial;
+  display: flex;
 }
 
 a {
