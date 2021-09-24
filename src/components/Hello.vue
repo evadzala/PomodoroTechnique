@@ -3,6 +3,9 @@
     h1 to do list
     .inputComponent
       input.inputBorder(type="text" v-model="content" placeholder="請輸入" @keyup.enter="addItem")
+      input.inputButton(type="button" value="ADD" @click="addItem")
+      
+
     .contentList
       .cell(v-for="(item, index) in notCompleteList" :key="index")
         input(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
@@ -72,20 +75,41 @@ h1, h2 {
   font-weight: normal;
 }
 
-.contentList {
-  background-color: #442556;
-  margin: 0px 10%;
+.inputComponent {
+  margin: 0 10%;
   max-width: 375px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .inputBorder {
   border-color: #f5a623;
-  width: auto;
+  border-radius: 8px;
+  width: 70%;
+  height: 25px;
+  font-size: 1.15rem;
+}
+
+.inputBorder:focus {
+  outline: none;
+}
+
+.inputButton {
+  background-color: #f5a623;
+  width: 20%;
+  border-radius: 8px;
+}
+
+.contentList {
+  margin: 20px 10%;
+  max-width: 375px;
 }
 
 .cell {
   text-align: initial;
   display: flex;
+  margin: 10px 0;
+  font-size: 1.15rem;
 }
 
 a {
