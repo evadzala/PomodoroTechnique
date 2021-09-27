@@ -1,15 +1,17 @@
 <template lang="pug">
   .toDoList
-    h1 to do list
+    h1.title to do list
     .inputComponent
-      input.inputBorder(type="text" v-model="content" placeholder="請輸入" @keyup.enter="addItem")
+      input.border.inputBorder(type="text" v-model="content" placeholder="請輸入" @keyup.enter="addItem")
       input.inputButton(type="button" value="ADD" @click="addItem")
       
 
     .contentList
       .cell(v-for="(item, index) in notCompleteList" :key="index")
-        input(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
-        label {{ item.content }}
+        .cellFront
+          input.border(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
+          label {{ item.content }}
+        span.delete(@click="deleteItem(item)") Delete
     
     //- h1 complete list
     //- div.contentList
@@ -27,13 +29,7 @@ export default {
   data () {
     return {
       content: '',
-      toDoList: [
-        { index: 1, content: 'test1', isComplete: false },
-        { index: 2, content: 'test2', isComplete: true },
-        { index: 3, content: 'test3', isComplete: false },
-        { index: 4, content: 'test4', isComplete: true },
-        { index: 5, content: 'test5', isComplete: false }
-      ]
+      toDoList: []
     }
   },
 
@@ -64,6 +60,10 @@ export default {
       console.log('data', data)
       // data.isComplete = !data.isComplete
       // this.toDoList.fill(data, )
+    },
+    deleteItem (item) {
+      let testList = this.toDoList.filter(node => item.index !== node.index)
+      this.toDoList = testList
     }
   }
 }
@@ -73,6 +73,7 @@ export default {
 <style>
 h1, h2 {
   font-weight: normal;
+  color: #f5a623;
 }
 
 .inputComponent {
@@ -82,8 +83,11 @@ h1, h2 {
   justify-content: space-between;
 }
 
+.border {
+  border: 1px solid #f5a623;
+}
+
 .inputBorder {
-  border-color: #f5a623;
   border-radius: 8px;
   width: 70%;
   height: 25px;
@@ -97,7 +101,7 @@ h1, h2 {
 .inputButton {
   background-color: #f5a623;
   width: 20%;
-  border-radius: 8px;
+  border-radius: 20px;
 }
 
 .contentList {
@@ -108,8 +112,13 @@ h1, h2 {
 .cell {
   text-align: initial;
   display: flex;
+  justify-content: space-between;
   margin: 10px 0;
   font-size: 1.15rem;
+}
+
+.delete {
+  color: #f5a623;
 }
 
 a {

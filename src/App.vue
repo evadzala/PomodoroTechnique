@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <!-- <header>
+    <header>
       <span>Vue.js PWA</span>
-    </header> -->
+    </header>
     <main>
-      <!-- <img src="./assets/logo.png" alt="Vue.js PWA"> -->
       <router-view></router-view>
     </main>
   </div>
@@ -19,13 +18,13 @@ export default {
 <style>
 body {
   margin: 0;
+  background-color: #2d2c2c;
 }
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 
 main {
@@ -37,8 +36,7 @@ header {
   margin: 0;
   height: 56px;
   padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
+  background-color: #434343;
 }
 
 header span {
