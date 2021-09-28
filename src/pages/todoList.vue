@@ -12,20 +12,11 @@
           input.border(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
           label {{ item.content }}
         span.delete(@click="deleteItem(item)") Delete
-    
-    //- h1 complete list
-    //- div.contentList
-    //-   div.cell(v-for="(item, index) in isCompleteList" :key='index')
-    //-     input(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
-    //-     label {{ item.content}}
-    
-    
-
 </template>
 
 <script>
 export default {
-  name: 'hello',
+  name: 'todoList',
   data () {
     return {
       content: '',
@@ -58,8 +49,6 @@ export default {
     doCheck (data, index) {
       console.log('index', index)
       console.log('data', data)
-      // data.isComplete = !data.isComplete
-      // this.toDoList.fill(data, )
     },
     deleteItem (item) {
       let testList = this.toDoList.filter(node => item.index !== node.index)
@@ -69,7 +58,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 h1, h2 {
   font-weight: normal;
