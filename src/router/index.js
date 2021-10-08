@@ -8,7 +8,7 @@ export default new Router({
     {
       path: '/countdownClock',
       name: 'countdownClock',
-      component: () => import('@/pages/countdownClock')
+      component: () => import('@/pages/countdownClock/index')
     },
     {
       path: '/todoList',
