@@ -38,7 +38,6 @@ export default {
     startCount () {
       this.status = 'stop'
       this.timer = setInterval(this.countDown, 1000)
-      console.log('timer', this.timer)
     },
     stopCount () {
       this.status = null
