@@ -1,6 +1,7 @@
 <template lang="pug">
   .headerBar
     .outline(@click="goToOtherPage('todoList')") todoList
+    .outline(@click="goToOtherPage('completeList')") completeList
     .outline(@click="goToOtherPage('countdownClock')") clock
 
 </template>
@@ -11,7 +12,7 @@ export default {
 
   methods: {
     goToOtherPage (pageName) {
-      this.$router.push(pageName)
+      if (this.$route.name !== pageName) this.$router.push(pageName)
     }
   }
 }
