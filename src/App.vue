@@ -1,19 +1,21 @@
-<template>
-  <div id="app">
-    <headerBar></headerBar>
-    <main>
-      <router-view></router-view>
-    </main>
-  </div>
+<template lang="pug">
+  div(id="app")
+    .headerBar
+    main
+      router-view
+    footerBar
 </template>
 
 <script>
 import headerBar from '@/components/headerBar'
+import footerBar from '@/components/footer'
+
 export default {
   name: 'app',
 
   components: {
-    headerBar
+    headerBar,
+    footerBar
   }
 }
 </script>
@@ -21,7 +23,7 @@ export default {
 <style>
 body {
   margin: 0;
-  background-color: #2d2c2c;
+  background-color:#E5E5E5;
 }
 
 #app {
@@ -30,19 +32,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-main {
-  text-align: center;
-  margin-top: 40px;
+.headerBar {
+  height: 44px;
 }
 
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
+main {
+  text-align: center;
+  margin-top: 44px;
 }
 </style>
