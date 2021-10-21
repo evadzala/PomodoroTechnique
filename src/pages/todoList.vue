@@ -61,7 +61,7 @@ export default {
 <style>
 h1, h2 {
   font-weight: normal;
-  color: #f5a623;
+  /* color: #f5a623; */
 }
 
 .inputComponent {
@@ -69,10 +69,6 @@ h1, h2 {
   max-width: 375px;
   display: flex;
   justify-content: space-between;
-}
-
-.border {
-  border: 1px solid #f5a623;
 }
 
 .inputBorder {

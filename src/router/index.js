@@ -16,9 +16,9 @@ export default new Router({
       component: () => import('@/pages/todoList')
     },
     {
-      path: '/completeList',
-      name: 'completeList',
-      component: () => import('@/pages/completeList')
+      path: '/setting',
+      name: 'setting',
+      component: () => import('@/pages/setting')
     }
   ]
 })

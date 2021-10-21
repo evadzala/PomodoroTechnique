@@ -1,8 +1,8 @@
 <template lang="pug">
   .headerBar
     .outline(@click="goToOtherPage('todoList')") todoList
-    .outline(@click="goToOtherPage('completeList')") completeList
     .outline(@click="goToOtherPage('countdownClock')") clock
+    .outline(@click="goToOtherPage('setting')") setting
 
 </template>
 
@@ -29,9 +29,9 @@ export default {
   align-items: center;
 }
 
-.outline {
+/* .outline {
   background-color: #f5a623;
 	outline: 2px solid #f5a623;
 	outline-offset: 2px;
-}
+} */
 </style>
