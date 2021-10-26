@@ -18,11 +18,11 @@
           option 567
     //- 控制按鈕
     .control
-      button.buttom-right(v-if="['start', 'workTimeFinish', 'restTimeFinish'].includes(status)" @click="startCount") 開始專注
-      button.buttom-right(v-else-if="['workTime', 'restTime'].includes(status)" @click="stopCount") 暫停
+      button.buttom-big(v-if="['start', 'workTimeFinish', 'restTimeFinish'].includes(status)" @click="startCount") 開始專注
+      button.buttom-big(v-else-if="['workTime', 'restTime'].includes(status)" @click="stopCount") 暫停
       div(v-else)
         button.buttom-right(v-if="counter !== 0" @click="continueCount") 繼續
-        button.buttom-left(@click="restart") 取消
+        button.buttom-left.animate__slideInRight(@click="restart") 停止
 </template>
 
 <script>
@@ -148,11 +148,19 @@ export default {
 }
 
 // 控制按鈕
-.control {
-  // position: relative;
+.buttom-big {
+  height: 52px;
+  background-color: #FF4433;
+  border-radius: 100px;
+  color: #fff;
+  border: none;
+  font-size: 1.14rem;
+
+  width: 100%;
 }
 .buttom-right {
-  // position: relative;
+  position: relative;
+  float: right;
   height: 52px;
   background-color: #FF4433;
   border-radius: 100px;
@@ -164,12 +172,11 @@ export default {
   right: 0;
 }
 .buttom-left {
-  position: absolute;
   height: 52px;
-  background-color: #FF4433;
+  background-color: #FFF;
   border-radius: 100px;
-  color: #fff;
-  border: none;
+  border: 2px solid #FF4433 ;
+  color: #FF4433;
   font-size: 1.14rem;
 
   width: 35%;
