@@ -1,9 +1,11 @@
 <template lang="pug">
   .countdown-clock
+    //- 切換開關
+    .switch-zone
+      countdown-auto-switch.switch-position
     //- 倒數器
     .countdown-clock-device
       .workClock
-        //- h1 秒 {{ counter }}
         h1.countdown-clock-font {{ paddingzero(Math.floor(counter/60), 2) }}:{{ paddingzero(counter % 60, 2) }}
     //- 下拉選單
     .toDOList
@@ -24,7 +26,11 @@
 </template>
 
 <script>
+import countdownAutoSwitch from './countdownAutoSwitch.vue'
 export default {
+  components: {
+    countdownAutoSwitch
+  },
   data () {
     return {
       // 專注時間與休息時間以秒為單位
@@ -98,13 +104,25 @@ export default {
 
 <style lang="scss" scoped>
 .countdown-clock {
-  padding: 100px 4.2% 0;
+  padding: 16px;
 }
+// 切換開關
+.switch-zone {
+  background-color: brown;
+  position: relative;
+}
+.switch-position {
+  position: relative;
+  float: right;
+  right: 0;
+}
+
 // 倒數器
 .countdown-clock-device {
   display: flex;
   justify-content: center;
-  margin: 16px;
+  margin-top: 75px;
+  padding: 16px;
 }
 .workClock {
   background-color: #fff;
@@ -131,10 +149,10 @@ export default {
 
 // 控制按鈕
 .control {
-  position: relative;
+  // position: relative;
 }
 .buttom-right {
-  position: absolute;
+  // position: relative;
   height: 52px;
   background-color: #FF4433;
   border-radius: 100px;
