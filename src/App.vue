@@ -34,10 +34,6 @@ body {
 
 .headerBar {
   height: 44px;
-}
-
-main {
-  text-align: center;
-  margin-top: 44px;
+  background-color: #FFF;
 }
 </style>

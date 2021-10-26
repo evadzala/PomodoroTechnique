@@ -4,7 +4,6 @@
     .inputComponent
       input.border.inputBorder(type="text" v-model="content" placeholder="請輸入" @keyup.enter="addItem")
       input.inputButton(type="button" value="ADD" @click="addItem")
-      
 
     .contentList
       .cell(v-for="(item, index) in notCompleteList" :key="index")
@@ -83,7 +82,7 @@ h1, h2 {
 }
 
 .inputButton {
-  background-color: #f5a623;
+  /* background-color: #f5a623; */
   width: 20%;
   border-radius: 20px;
 }
@@ -102,7 +101,7 @@ h1, h2 {
 }
 
 .delete {
-  color: #f5a623;
+  /* color: #f5a623; */
 }
 
 a {

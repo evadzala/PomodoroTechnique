@@ -15,9 +15,10 @@ export default {
   data () {
     return {
       pageList: [
+        { path: 'countdownClock', name: '歷史統計' },
+        { path: 'todoList', name: '今日總攬' },
         { path: 'countdownClock', name: '番茄鐘' },
-        { path: 'todoList', name: '任務清單' },
-        { path: 'countdownClock', name: '數據統計' },
+        { path: 'countdownClock', name: '任務清單' },
         { path: 'setting', name: '個人設定' }
       ]
     }
@@ -33,7 +34,6 @@ export default {
 
 <style lang="scss">
 .footer {
-  /* background-color:blue; */
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -64,13 +64,21 @@ export default {
   }
 }
 .buttom {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background-color: #969799;
 }
+.buttom:nth-child(even) {
+  width: 100px;
+  height: 100px;
+  background-color: #FF4433;
+}
 .buttom-name {
   color: #969799;
+  font-size: .7rem;
+  top: 2px;
+  margin: 8px;
 }
 
 .bottomSpace {
