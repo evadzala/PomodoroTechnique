@@ -46,12 +46,6 @@ export default {
     }
   },
 
-  watch: {
-    isCheck: function (val) {
-      console.log('isCheck123', this.isCheck)
-    }
-  },
-
   created () {
     this.init()
   },
@@ -101,6 +95,11 @@ export default {
         } else if (this.status === 'restTime') {
           this.status = 'restTimeFinish'
           this.counter = this.workCounterSetting
+        }
+
+        // 自動倒數
+        if (this.isCheck) {
+          this.startCount()
         }
       }
     },
