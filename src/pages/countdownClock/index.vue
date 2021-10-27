@@ -2,7 +2,7 @@
   .countdown-clock
     //- 切換開關
     .switch-zone
-      countdown-auto-switch.switch-position
+      countdown-auto-switch.switch-position(v-model="isCheck")
     //- 倒數器
     .countdown-clock-device
       .workClock
@@ -27,6 +27,7 @@
 
 <script>
 import countdownAutoSwitch from './countdownAutoSwitch.vue'
+
 export default {
   components: {
     countdownAutoSwitch
@@ -39,7 +40,15 @@ export default {
       timer: null,
 
       counter: 0,
-      status: null
+      status: null,
+
+      isCheck: false
+    }
+  },
+
+  watch: {
+    isCheck: function (val) {
+      console.log('isCheck123', this.isCheck)
     }
   },
 
