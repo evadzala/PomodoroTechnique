@@ -1,13 +1,22 @@
 <template lang="pug">
   label.switch
-    input(type="checkbox")
+    input(type="checkbox" :checked="isCheck" @click="autoSwitch")
     span.slider.round
 </template>
 
 <script>
 export default {
   data () {
-    return {}
+    return {
+      isCheck: false
+    }
+  },
+
+  methods: {
+    autoSwitch () {
+      this.isCheck = !this.isCheck
+      this.$emit('input', this.isCheck)
+    }
   }
 }
 </script>
@@ -17,7 +26,7 @@ export default {
   position: relative;
   display: inline-block;
   width: 96px;
-  height: 25px;
+  height: 26px;
 }
 
 .switch input { 
