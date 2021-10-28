@@ -66,7 +66,7 @@ export default {
 .slider::after {
   content: '自動休息';
   font-size: 10px;
-  color: #C8C9CC;
+  color: #646566;
 
   // position: relative
   text-align: center;
