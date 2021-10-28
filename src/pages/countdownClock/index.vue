@@ -5,8 +5,12 @@
       countdown-auto-switch.switch-position(v-model="isCheck")
     //- 倒數器
     .countdown-clock-device
-      .workClock
-        h1.countdown-clock-font {{ paddingzero(Math.floor(counter/60), 2) }}:{{ paddingzero(counter % 60, 2) }}
+      .workClock-counting(:class="{ 'counting': ['workTime', 'restTime'].includes(status) }")
+        .workClock(:class="{ 'working': ['workTime'].includes(status), 'rest': ['restTime'].includes(status) }")
+          h1.countdown-clock-font {{ paddingzero(Math.floor(counter/60), 2) }}:{{ paddingzero(counter % 60, 2) }}
+          //- h2.status-font 專注中
+          h2.status-font.working-status-font(v-if="['workTime'].includes(status)") 專注中
+          h2.status-font.rest-status-font(v-else-if="['restTime'].includes(status)") 休息中
     //- 下拉選單
     .toDOList
       .toDOList-select-outside
@@ -18,7 +22,7 @@
           option 567
     //- 控制按鈕
     .control
-      button.buttom.big(v-if="['start', 'workTimeFinish', 'restTimeFinish'].includes(status)" @click="startCount") 開始專注
+      button.buttom.big(v-if="['start', 'workTimeFinish', 'restTimeFinish'].includes(status)" @click.space="startCount") 開始專注
       button.buttom.big(v-else-if="['workTime', 'restTime'].includes(status)" @click="stopCount") 暫停
       div(v-else)
         button.buttom.right(v-if="counter !== 0" @click="continueCount") 繼續
@@ -116,7 +120,6 @@ export default {
 }
 // 切換開關
 .switch-zone {
-  background-color: brown;
   position: relative;
 }
 .switch-position {
@@ -132,6 +135,18 @@ export default {
   margin-top: 75px;
   padding: 16px;
 }
+.workClock-counting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px dashed rgba(0,0,0,0);
+  height: 275px;
+  width: 275px;
+}
+.counting {
+  border: 4px dashed #FF4433;
+  border-radius: 50%;
+}
 .workClock {
   background-color: #fff;
   height: 255px;
@@ -139,12 +154,32 @@ export default {
   border: solid 4px #323233;
   border-radius: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.working {
+  border: solid 4px #FF4433;
+}
+.rest {
+  border: solid 4px #969799;
 }
 .countdown-clock-font {
   font-size: 60px;
 }
+.status-font {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 160px;
+}
+.working-status-font {
+  color: #FF4433;
+}
+.rest-status-font {
+  color: #969799;
+}
+
 
 // 下拉選單
 .toDOList-select-inside {
