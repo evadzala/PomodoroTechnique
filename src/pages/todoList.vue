@@ -5,10 +5,10 @@
       template(v-for="(item, key, index) in toDoList")
         .eachClass
           span {{ key }}
-      .eachClass(@click="addNewClass") add
-      input.eachClass.newClass(v-model="newClassName")
+      .eachClass(v-if="inputClass" @click="addNewClass") add
+      input.eachClass.newClass(v-else v-model="newClassName")
     .taskContent
-      template(v-for="")
+      template
 </template>
 
 <script>
@@ -16,6 +16,7 @@ export default {
   data () {
     return {
       newClassName: '',
+      inputClass: true,
       toDoList: {
         '全部': [
           {
@@ -72,6 +73,7 @@ export default {
   methods: {
     addNewClass () {
       // this.toDoList
+      this.inputClass = !this.inputClass
     }
   }
 }
@@ -95,7 +97,6 @@ export default {
   width: 100%;
   overflow: scroll;
   padding-left: 16px;
-
   display: flex;
   align-items: center;
 }
@@ -111,7 +112,7 @@ export default {
   writing-mode: horizontal-tb;
 }
 .newClass {
-  width: 40px;
+  width: 35px;
 }
 
 .taskContent {
