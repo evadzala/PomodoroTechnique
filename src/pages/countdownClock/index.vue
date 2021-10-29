@@ -8,7 +8,6 @@
       .workClock-counting(:class="{ 'counting': ['workTime', 'restTime'].includes(status) }")
         .workClock(:class="{ 'working': ['workTime'].includes(status), 'rest': ['restTime'].includes(status) }")
           h1.countdown-clock-font {{ paddingzero(Math.floor(counter/60), 2) }}:{{ paddingzero(counter % 60, 2) }}
-          //- h2.status-font 專注中
           h2.status-font.working-status-font(v-if="['workTime'].includes(status)") 專注中
           h2.status-font.rest-status-font(v-else-if="['restTime'].includes(status)") 休息中
     //- 下拉選單
