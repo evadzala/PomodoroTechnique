@@ -18,7 +18,7 @@ export default {
         { path: 'countdownClock', name: '歷史統計' },
         { path: 'todoList', name: '今日總攬' },
         { path: 'countdownClock', name: '番茄鐘' },
-        { path: 'countdownClock', name: '任務清單' },
+        { path: 'todoList', name: '任務清單' },
         { path: 'setting', name: '個人設定' }
       ]
     }
