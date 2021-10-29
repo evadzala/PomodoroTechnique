@@ -1,110 +1,123 @@
 <template lang="pug">
-  .toDoList
-    h1.title to do list
-    .inputComponent
-      input.border.inputBorder(type="text" v-model="content" placeholder="請輸入" @keyup.enter="addItem")
-      input.inputButton(type="button" value="ADD" @click="addItem")
-
-    .contentList
-      .cell(v-for="(item, index) in notCompleteList" :key="index")
-        .cellFront
-          input.border(type="checkbox" :checked='item.isComplete' @click="doCheck(item, index)")
-          label {{ item.content }}
-        span.delete(@click="deleteItem(item)") Delete
+  .todoList
+    .dateTimePicker
+    .taskClass
+      template(v-for="(item, key, index) in toDoList")
+        .eachClass
+          span {{ key }}
+      .eachClass(@click="addNewClass") add
+      input.eachClass.newClass(v-model="newClassName")
+    .taskContent
+      template(v-for="")
 </template>
 
 <script>
 export default {
-  name: 'todoList',
   data () {
     return {
-      content: '',
-      toDoList: []
-    }
-  },
-
-  computed: {
-    isCompleteList () {
-      return this.toDoList.filter(node => node.isComplete)
-    },
-    notCompleteList () {
-      return this.toDoList.filter(node => !node.isComplete)
-    }
-  },
-
-  methods: {
-    addItem () {
-      if (this.content !== '') {
-        this.toDoList.push(
+      newClassName: '',
+      toDoList: {
+        '全部': [
           {
-            index: this.toDoList.length + 1,
-            content: this.content,
-            isComplete: false
+            tomatoAmount: 1,
+            title: 'task1',
+            status: true,
+            content: '內容1',
+            dateTime: 'test'
+          },
+          {
+            tomatoAmount: 2,
+            title: 'task2',
+            status: false,
+            content: '內容2',
+            dateTime: 'test'
+          },
+          {
+            tomatoAmount: 3,
+            title: 'task2',
+            status: false,
+            content: '內容2',
+            dateTime: 'test'
           }
-        )
+        ],
+        '運動': [
+          {
+            tomatoAmount: 1,
+            title: '運動1',
+            status: true,
+            content: '內容1',
+            dateTime: 'test'
+          },
+          {
+            tomatoAmount: 1,
+            title: '運動2',
+            status: false,
+            content: '內容2',
+            dateTime: 'test'
+          }
+        ]
+        // '運動1': [],
+        // '運動2': []
+        // '運動3': []
+        // '運動4': [],
+        // '運動5': [],
+        // '運動6': [],
+        // '運動7': [],
+        // '運動8': [],
+        // '運動9': [],
+        // '運動10': []
       }
-      this.content = ''
-    },
-    doCheck (data, index) {
-      console.log('index', index)
-      console.log('data', data)
-    },
-    deleteItem (item) {
-      let testList = this.toDoList.filter(node => item.index !== node.index)
-      this.toDoList = testList
+    }
+  },
+  methods: {
+    addNewClass () {
+      // this.toDoList
     }
   }
 }
 </script>
 
-<style>
-h1, h2 {
-  font-weight: normal;
-  /* color: #f5a623; */
-}
-
-.inputComponent {
-  margin: 0 10%;
-  max-width: 375px;
+<style lang="scss" scoped>
+.todoList {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 }
 
-.inputBorder {
-  border-radius: 8px;
-  width: 70%;
-  height: 25px;
-  font-size: 1.15rem;
+.dateTimePicker {
+  height: 52px;
+  width: 100%;
+  background-color: fuchsia;
 }
 
-.inputBorder:focus {
-  outline: none;
-}
+.taskClass {
+  height: 64px;
+  width: 100%;
+  overflow: scroll;
+  padding-left: 16px;
 
-.inputButton {
-  /* background-color: #f5a623; */
-  width: 20%;
-  border-radius: 20px;
-}
-
-.contentList {
-  margin: 20px 10%;
-  max-width: 375px;
-}
-
-.cell {
-  text-align: initial;
   display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-  font-size: 1.15rem;
+  align-items: center;
+}
+.eachClass {
+  height: 32px;
+  margin-right: 4px;
+  border: 2px solid #FF4433;
+  border-radius: 100px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  writing-mode: horizontal-tb;
+}
+.newClass {
+  width: 40px;
 }
 
-.delete {
-  /* color: #f5a623; */
-}
-
-a {
-  color: #35495E;
+.taskContent {
+  height: 500px;
+  width: 100%;
+  margin: 0 16px;
+  background-color: indigo;
 }
 </style>
