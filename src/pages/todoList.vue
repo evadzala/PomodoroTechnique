@@ -2,13 +2,14 @@
   .todoList
     .dateTimePicker
     .taskClass
+      .eachClass
+        span.classTitle 全部
       template(v-for="(item, key, index) in toDoList")
         .eachClass
-          span {{ key }}
-      .eachClass(v-if="inputClass" @click="addNewClass") add
-      input.eachClass.newClass(v-else v-model="newClassName")
+          span.classTitle {{ item.class }}
+      input.eachClass.newClass(v-model.trim="newClassName" placeholder="add" @keyup.enter="addNewClass" @blur="addNewClass")
     .taskContent
-      template
+      .contentRange
 </template>
 
 <script>
@@ -17,63 +18,74 @@ export default {
     return {
       newClassName: '',
       inputClass: true,
-      toDoList: {
-        '全部': [
-          {
-            tomatoAmount: 1,
-            title: 'task1',
-            status: true,
-            content: '內容1',
-            dateTime: 'test'
-          },
-          {
-            tomatoAmount: 2,
-            title: 'task2',
-            status: false,
-            content: '內容2',
-            dateTime: 'test'
-          },
-          {
-            tomatoAmount: 3,
-            title: 'task2',
-            status: false,
-            content: '內容2',
-            dateTime: 'test'
-          }
-        ],
-        '運動': [
-          {
-            tomatoAmount: 1,
-            title: '運動1',
-            status: true,
-            content: '內容1',
-            dateTime: 'test'
-          },
-          {
-            tomatoAmount: 1,
-            title: '運動2',
-            status: false,
-            content: '內容2',
-            dateTime: 'test'
-          }
-        ]
-        // '運動1': [],
-        // '運動2': []
-        // '運動3': []
-        // '運動4': [],
-        // '運動5': [],
-        // '運動6': [],
-        // '運動7': [],
-        // '運動8': [],
-        // '運動9': [],
-        // '運動10': []
-      }
+      toDoList: [
+        {
+          class: '運動',
+          items: [
+            {
+              tomatoAmount: 1,
+              title: '運動1',
+              status: true,
+              countdownTime: {
+                working: 25,
+                rest: 5
+              },
+              dateTime: 'test'
+            }
+          ]
+        },
+        {
+          class: '工作',
+          items: [
+            {
+              tomatoAmount: 1,
+              title: '運動1',
+              status: true,
+              countdownTime: {
+                working: 25,
+                rest: 5
+              },
+              dateTime: 'test'
+            }
+          ]
+        }
+      ]
     }
   },
+
+  computed: {
+    'allTodoList': function () {
+      console.log('allTodoList')
+      let allList = { class: '全部', items: [] }
+      this.toDoList.forEach(node => {
+        allList.items = allList.items.concat(node.items)
+      })
+
+      return allList
+    }
+  },
+
   methods: {
-    addNewClass () {
-      // this.toDoList
+    classSwitch () {
       this.inputClass = !this.inputClass
+    },
+    addNewClass () {
+      if (this.newClassName !== '') {
+        let isExist = this.toDoList.find(node => node.class === this.newClassName)
+        if (isExist) {
+          alert('大類重複')
+        } else {
+          let item = {
+            class: this.newClassName,
+            items: []
+          }
+          this.toDoList.push(item)
+        }
+      }
+
+      this.newClassName = ''
+
+      this.classSwitch()
     }
   }
 }
@@ -84,6 +96,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow:hidden;
 }
 
 .dateTimePicker {
@@ -103,6 +116,7 @@ export default {
 .eachClass {
   height: 32px;
   margin-right: 4px;
+  background-color: #fff;
   border: 2px solid #FF4433;
   border-radius: 100px;
   padding: 0 16px;
@@ -111,14 +125,26 @@ export default {
   align-items: center;
   writing-mode: horizontal-tb;
 }
+.classTitle {
+  width: max-content;
+}
 .newClass {
   width: 35px;
+}
+input.newClass::placeholder {
+  color: #565656;
 }
 
 .taskContent {
   height: 500px;
   width: 100%;
   margin: 0 16px;
+  // padding: 0 25px;
   background-color: indigo;
 }
+// .contentRange {
+//   background-color: gold;
+//   height: 250px;
+//   width: 100%;
+// }
 </style>
