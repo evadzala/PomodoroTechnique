@@ -1,15 +1,25 @@
 <template lang="pug">
   .todoList
     .dateTimePicker
+
     .taskClass
-      .eachClass
+      .eachClass(@click="focusClass = 'all'" :class="{ 'focusOnClass': focusClass === 'all' }")
         span.classTitle 全部
-      template(v-for="(item, key, index) in toDoList")
-        .eachClass
+      template(v-for="(item, index) in toDoList")
+        .eachClass(@click="focusClass = index" :class="{ 'focusOnClass': focusClass === index }")
           span.classTitle {{ item.class }}
       input.eachClass.newClass(v-model.trim="newClassName" placeholder="add" @keyup.enter="addNewClass" @blur="addNewClass")
+
     .taskContent
-      .contentRange
+      template(v-for="task in focusClass === 'all' ? allTodoList.items : toDoList[focusClass].items")
+        .taskRange {{ task.title }}
+      .emptyTaskContent(v-if="toDoList[1].items.length === 0")
+        span 暫無任務清單
+
+    .addTask
+      .addTaskButtom
+        .tomatoIcon
+        span 新增任務
 </template>
 
 <script>
@@ -17,14 +27,35 @@ export default {
   data () {
     return {
       newClassName: '',
-      inputClass: true,
+      focusClass: 'all',
       toDoList: [
+        // { class: '全部', items: [] },
         {
           class: '運動',
           items: [
             {
               tomatoAmount: 1,
               title: '運動1',
+              status: true,
+              countdownTime: {
+                working: 25,
+                rest: 5
+              },
+              dateTime: 'test'
+            },
+            {
+              tomatoAmount: 1,
+              title: '運動2',
+              status: true,
+              countdownTime: {
+                working: 25,
+                rest: 5
+              },
+              dateTime: 'test'
+            },
+            {
+              tomatoAmount: 1,
+              title: '運動3',
               status: true,
               countdownTime: {
                 working: 25,
@@ -48,6 +79,10 @@ export default {
               dateTime: 'test'
             }
           ]
+        },
+        {
+          class: '唱歌',
+          items: []
         }
       ]
     }
@@ -66,9 +101,6 @@ export default {
   },
 
   methods: {
-    classSwitch () {
-      this.inputClass = !this.inputClass
-    },
     addNewClass () {
       if (this.newClassName !== '') {
         let isExist = this.toDoList.find(node => node.class === this.newClassName)
@@ -86,6 +118,10 @@ export default {
       this.newClassName = ''
 
       this.classSwitch()
+    },
+    toFocusOnClass (classValue) {
+      console.log('classValue', classValue)
+      this.focusClass = classValue
     }
   }
 }
@@ -95,7 +131,7 @@ export default {
 .todoList {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   overflow:hidden;
 }
 
@@ -125,6 +161,10 @@ export default {
   align-items: center;
   writing-mode: horizontal-tb;
 }
+.focusOnClass {
+  background-color: #FF4433;
+  color:#fff;
+}
 .classTitle {
   width: max-content;
 }
@@ -136,15 +176,34 @@ input.newClass::placeholder {
 }
 
 .taskContent {
-  height: 500px;
-  width: 100%;
+  height: 100%;
   margin: 0 16px;
-  // padding: 0 25px;
-  background-color: indigo;
+  border-radius: 8px;
+  background-color: #fff;
 }
-// .contentRange {
-//   background-color: gold;
-//   height: 250px;
-//   width: 100%;
-// }
+.taskRange {
+  height: 70px;
+  margin: 16px;
+  border-bottom: 1px solid #DCDEE0;
+}
+
+.addTask {
+  height: 43px;
+  margin: 16px;
+  background-color: #fff;
+  border: 1px solid #DCDEE0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addTaskButtom {
+  display: flex;
+}
+.tomatoIcon {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #FF4433;
+  margin-right: 8px;
+}
 </style>
